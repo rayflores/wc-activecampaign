@@ -21,10 +21,9 @@ class WC_Active_Campaign {
   
   
   public function __construct() {
-    add_action( 'admin_menu', array( $this, 'register_menu_page' ) );
     add_action( 'woocommerce_admin_order_data_after_billing_address', array ( $this, 'custom_checkout_fields_display_admin_order_meta' ), 10, 1 );
     add_action( 'add_meta_boxes', array( $this, 'custom_add_meta_boxes_to_order_admin' ) );
-    //    add_action( 'woocommerce_thankyou', array( $this, 'send_wp_request' ) ); 
+    add_action( 'woocommerce_thankyou', array( $this, 'send_wp_request' ) ); 
   }
   // Adding Meta container admin shop_order pages
   function custom_add_meta_boxes_to_order_admin()
@@ -76,20 +75,7 @@ class WC_Active_Campaign {
     </table><?php
 
   }
-
-  public function register_menu_page(){
-    add_menu_page(
-        'WC AC',
-        'WC AC',
-        'manage_options',
-        'wc-ac',
-//        array( $this, 'send_customer_data' ),
-        array( $this, 'send_wp_request' ),
-        'dashicons-admin-generic',
-        6
-    );
-  }
-  
+ 
   public function send_wp_request( ){
     $order_id = 23762;
     $order = wc_get_order( $order_id ); // WC_Order object
