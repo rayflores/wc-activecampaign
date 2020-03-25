@@ -21,7 +21,6 @@ class WC_Active_Campaign {
   
   
   public function __construct() {
-    add_action( 'woocommerce_admin_order_data_after_billing_address', array ( $this, 'custom_checkout_fields_display_admin_order_meta' ), 10, 1 );
     add_action( 'add_meta_boxes', array( $this, 'custom_add_meta_boxes_to_order_admin' ) );
     add_action( 'woocommerce_thankyou', array( $this, 'send_wp_request' ) ); 
   }
