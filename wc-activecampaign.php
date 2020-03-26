@@ -75,8 +75,7 @@ class WC_Active_Campaign {
 
   }
  
-  public function send_wp_request( ){
-    $order_id = 23762;
+  public function send_wp_request( $order_id ){
     $order = wc_get_order( $order_id ); // WC_Order object
     $user = $order->get_user(); // WC_User object
     // This section takes the input fields and converts them to the proper format
