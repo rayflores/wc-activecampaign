@@ -138,20 +138,20 @@ class WC_Active_Campaign {
     }
 // here we define the data we are posting in order to perform an update
     $post = array(
-        'email'                    => $order->get_billing_email(), // wc billing_email
-        'first_name'               => $order->get_billing_first_name(), // wc billing_first_name
-        'last_name'                => $order->get_billing_last_name(), // wc billing_last_name
-        'phone'                    => $order->get_billing_phone(), // wc billing_phone 
+        'email'                    => $student_email, // wc billing_email
+        'first_name'               => $student_first_name, // wc billing_first_name
+        'last_name'                => $student_last_name, // wc billing_last_name
+        'phone'                    => $student_phone, // wc billing_phone 
       // any custom fields
-        'field[%EMAIL_ADDRESS_FOR_COMMISSIONS%,0]'      => $order->get_billing_email(), // wc billing_email
+        'field[%EMAIL_ADDRESS_FOR_COMMISSIONS%,0]'      => $student_email, // wc billing_email
         'field[%USERNAME%,0]'      => $user->user_login, // WP_User login
         'field[%PASSWORD%,0]'      => $user->user_pass, // WP_User pass
         'field[%CONFIRM_PASSWORD%,0]'      => $user->user_pass, // WP_User pass
-        'field[%BILLING_ADDRESS_LINE_1%,0]'      => $order->get_billing_address_1(), // wc billing_address _1
-        'field[%BILLING_ADDRESS_LINE_2%,0]'      => $order->get_billing_address_2(), // wc billing_address_2
-        'field[%BILLING_CITY%,0]'      => $order->get_billing_city(), // wc billing_city
-        'field[%BILLING_STATE%,0]'      => $order->get_billing_state(), // wc billing_state
-        'field[%BILLING_ZIP_CODE%,0]'      => $order->get_billing_postcode(), // wc billing_postcode
+        'field[%BILLING_ADDRESS_LINE_1%,0]'      => $student_address_1, // wc billing_address _1
+        'field[%BILLING_ADDRESS_LINE_2%,0]'      => $student_address_2, // wc billing_address_2
+        'field[%BILLING_CITY%,0]'      => $student_city, // wc billing_city
+        'field[%BILLING_STATE%,0]'      => $student_state, // wc billing_state
+        'field[%BILLING_ZIP_CODE%,0]'      => $student_zip, // wc billing_postcode
       // STUDENT DETAILS
         'field[%STUDENT_NAME%,0]'      => $student_first_name . ' ' . $student_last_name, // using the personalization tag instead
         'field[%STUDENT_EMAIL%,0]'      => $student_email, // using the personalization tag instead
