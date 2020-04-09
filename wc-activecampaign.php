@@ -34,10 +34,11 @@ class WC_Active_Campaign {
    */
   public function custom_add_meta_fields_to_order_admin(){
     global $post;
+    $order = wc_get_order( $post->ID );
 
     $student_first_name = get_post_meta( $post->ID, 'student_first_name', true ) ? get_post_meta( $post->ID, 'student_first_name', true ) : '';
     $student_last_name = get_post_meta( $post->ID, 'student_last_name', true ) ? get_post_meta( $post->ID, 'student_last_name', true ) : '';
-    $student_email = get_post_meta( $post->ID, 'student_email', true ) ? get_post_meta( $post->ID, 'student_email', true ) : '';
+    $student_email = $order->get_billing_email();
     $student_address_1 = get_post_meta( $post->ID, 'student_address_1', true ) ? get_post_meta( $post->ID, 'student_address_1', true ) : '';
     $student_address_2 = get_post_meta( $post->ID, 'student_address_2', true ) ? get_post_meta( $post->ID, 'student_address_2', true ) : '';
     $student_city = get_post_meta( $post->ID, 'student_city', true ) ? get_post_meta( $post->ID, 'student_city', true ) : '';
@@ -77,6 +78,7 @@ class WC_Active_Campaign {
  
   public function send_wp_request( $order_id ){
     $order = wc_get_order( $order_id ); // WC_Order object
+    $billing_email = $order->get_billing_email();
     $user = $order->get_user(); // WC_User object
     // This section takes the input fields and converts them to the proper format
     $params = array(
@@ -101,7 +103,8 @@ class WC_Active_Campaign {
     $url = 'http://nutritiouslife.api-us1.com/admin/api.php?' . $query;
 
     $items_meta_data = $order->get_meta_data();
-    $student_first_name = $student_last_name = $student_email = $student_address_1 = $student_address_2 = $student_city = $student_state = $student_zip = $student_country = $student_phone = '';
+    $student_first_name = $student_last_name = $student_address_1 = $student_address_2 = $student_city = $student_state = $student_zip = $student_country = $student_phone = '';
+    $student_email = $billing_email;
 
     foreach( $items_meta_data as $item_meta_data ){
       if ( $item_meta_data->key === 'student_first_name' ) {
@@ -110,9 +113,9 @@ class WC_Active_Campaign {
       if ( $item_meta_data->key === 'student_last_name' ) {
         $student_last_name = $item_meta_data->value;
       }
-      if ( $item_meta_data->key === 'student_email' ) {
-        $student_email = $item_meta_data->value;
-      }
+//      if ( $item_meta_data->key === 'student_email' ) {
+//        $student_email = $item_meta_data->value;
+//      }
       if ( $item_meta_data->key === 'student_address_1' ) {
         $student_address_1 = $item_meta_data->value;
       }
